@@ -1,4 +1,6 @@
-## Hardware documentation
+Diverses pages lues.
+
+## Hardware documentation
 
  - CC2538 User Guide, http://www.ti.com/lit/ug/swru333a/swru333a.pdf
  - SmartRF06 User Guide, http://www.ti.com/lit/ug/swru321a/swru321a.pdf
@@ -6,19 +8,23 @@
  - Bootloader backdoor, http://processors.wiki.ti.com/index.php/CC2538_Bootloader_Backdoor
  - SmartRF Packet Sniffer User Guide, http://www.ti.com/lit/ug/swru187g/swru187g.pdf
 
-## Contiki
+## Contiki
 
  - CC2538-bsl `README` file, https://github.com/JelmerT/cc2538-bsl
  - Contiki for CC2538, https://github.com/contiki-os/contiki/tree/master/platform/cc2538dk
  - Source-level documentation, http://contiki.sourceforge.net/docs/2.6/
 
-### Protothreads
+Implémentations :
+
+ - https://github.com/contiki-os/contiki/tree/master/apps/servreg-hack
+
+### Protothreads
 
  - Process documentation, https://github.com/contiki-os/contiki/wiki/Processes
  - Local continuation implementation with `switch`es, https://github.com/contiki-os/contiki/blob/master/core/sys/lc-switch.h
  - Reference paper for switch-based couroutines in C, http://www.chiark.greenend.org.uk/~sgtatham/coroutines.html
 
-## 6lowPAN
+## 6lowPAN
 
  - *6lowPAN demystified*, Jonas Olsson, Texas Instruments, 2014, http://www.ti.com/lit/wp/swry013/swry013.pdf
 
