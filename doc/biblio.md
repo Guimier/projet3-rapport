@@ -14,7 +14,7 @@ Diverses pages lues.
  - Contiki for CC2538, https://github.com/contiki-os/contiki/tree/master/platform/cc2538dk
  - Source-level documentation, http://contiki.sourceforge.net/docs/2.6/
 
-Implémentations :
+Implementations:
 
  - https://github.com/contiki-os/contiki/tree/master/apps/servreg-hack
 
@@ -27,6 +27,10 @@ Implémentations :
 ## 6lowPAN
 
  - *6lowPAN demystified*, Jonas Olsson, Texas Instruments, 2014, http://www.ti.com/lit/wp/swry013/swry013.pdf
+
+## Arduino/Xbee
+
+ - Shield v2 documentation, http://www.seeedstudio.com/wiki/XBee_Shield_V2.0
 
 ## Base
 
