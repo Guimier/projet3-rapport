@@ -1,0 +1,44 @@
+\subsection{\emph{Contiki}}
+
+\subsubsection{Installation}
+
+\todo
+
+\subsubsection{Cooja}
+
+\emph{Contiki} inclue un logiciel pour la simulation d’une communication entre plusieurs objets connectés, \emph{Cooja}.
+
+Nous avons commencé notre utilisation de \emph{Contiki} en testant l’exécution d’un des programmes donnés en exemple.
+\emph{Cooja} n’étant pas livré avec un émulateur pour la CC 2538, nous avons utilisé une simulation d’une \todo[skymote ?].
+
+\todo[copie d’écran de Cooja]
+
+\emph{Cooja} est conçu pour pouvoir définir de nouveaux émulateurs.
+Une recherche sur Internet nous a permis de découvrir que d’autres personnes ayant souhaité un tel émulateur avaient été invitées à l’écrire elles-même, sans que nous ayons pu trouver le résultat — si le conseil a été suivi.
+Comme l’utilisation du simulateur n’était pas primordiale dans notre projet, nous avons donc décidé de nous concentrer sur le développement directement sur les cartes.
+
+\subsubsection{Architecture des programmes}
+
+Les programmes compilés avec \emph{Contiki} sont constitué d’un unique exécutable qui sera installé dans la mémoire de la carte cible.
+Afin de faciliter le développement modulaire, les bibliothèques de \emph{Contiki} incluent un mécanisme de processus légers à ordonnancement coopératif.
+
+\paragraph{Processus}
+
+Nous n’avions initialement pas connaissance de l’implémentation exacte des ces processus légers, ce qui a été à l’origine de dysfonctionnements dont nous avons mis du temps à trouver la cause.
+Le mécanisme utilisé, conçu pour économiser la mémoire, implique en effet des contraintes de programmation auxquelles nous n’étions pas habitués :
+\begin{itemize}
+	\item la valeur des variables locales peut changer lors de l’appel à une des macros de contrôle des procesus ;
+	\item certaines portions du code peuvent être exécutée à des moments inattendus.
+\end{itemize}
+
+En effet, les processus sont implémentés sous forme de \emph{protothreads}, c’est-à-dire de \emph{threads} sans sauvegarde de la pile.
+Chaque processus est une procédure (en pratique un pointeur de fonction) qui est appelée à chaque fois que le processus est activé.
+Les processus rendent la main à l’ordonnanceur lorsque cette procédure se termine (instruction \texttt{return}).
+
+Les macros fournies par \emph{Contiki} permettent de sauvegarder la position et d’y retourner en donnant l’impression de fonctionner comme dans une bibliothèque de \emph{threads} (par exemple en fournissant une pseudo-instruction \texttt{YIELD}).
+La pile est cependant utilisée par d’autres processus entre la mise en pause du processus et son réveil, modifiant l’état des variables locales non statiques.
+Avant d’avoir compris ce mécanisme, nous avons utilisé une variable de boucle dont le comportement étrange de la valeur nous a poussé à faire l’étude précise de ce fonctionnement.
+
+D’autre part, le code situé avant la macro \texttt{PROCESS\_BEGIN} est exécuté à chaque réveil du processus.
+Nous n’avons pas eu de problème avec ce comportement, l’ayant compris avant de tenter des modification dans cette zone.
+En revanche, sa connaissance nous a été utile pour comprendre des blocages que nous avons eu avec les \emph{timers}, en y plaçant du code de journalisation.
