@@ -9,3 +9,5 @@
 *.blg
 *.pdf
 annexes.tex
+*.mrp
+rapport.synctex.gz
