@@ -1,0 +1,38 @@
+\subsection{Cartes CC 2538}
+
+La première carte que nous avons utilisé est la CC 2538 de \emph{Texas Instruments} (TI), branchée sur le kit de développement \emph{SmartRF 06}.
+
+\subsubsection{Présentation}
+
+\todo[Images et descriptions]
+
+\subsubsection{Test des cartes}
+
+\todo[Copies d’écran RF studio \& description]
+
+\subsubsection{Programmes exemple}
+
+\paragraph{Installation sur les cartes}
+
+\emph{Contiki} fournit un script \emph{Python} pour installer un programme sur une carte CC 2538, appelé \emph{cc2538-bsl} \todo[référence documentation], qui est intégré dans le \texttt{Makefile}.
+Nous avons initialement suivi les étapes décrites dans sa documentation pour configurer la communication avec les cartes CC 25358, mais le résultat a invariablement été un message d’erreur indiquant que la carte ne répondait pas aux solicitations du script.
+
+\todo[Copie de l’erreur]
+
+Nous nous sommes alors tournés vers le logiciel développé par TI \todo[nom].
+Celui-ci ne fonctionnant que sur un système Windows \todo[Mac aussi ?], nous l’avons installé sur la machine hôte de la machine virtuelle.
+Afin de transmettre facilement les fichiers compilés par \emph{Contiki}, nous avons utilisé les outils de partage de dossier proposés par \emph{VirtualBox}.
+
+\todo[Copies d’écran du logiciel]
+
+\paragraph{\texttt{simple-udp-rpl}}
+
+\todo[Description programmes]
+
+\paragraph{Manipulations des LEDs et boutons}
+
+\todo[Description programme]
+
+\paragraph{Développement d’un programme d’action à distance}
+
+\todo[Fonctionnalités, architecture]
