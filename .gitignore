@@ -4,3 +4,8 @@
 *.lof
 *.log
 *~ 
+*.aux
+*.bbl
+*.blg
+*.pdf
+annexes.tex
