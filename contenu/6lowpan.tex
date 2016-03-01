@@ -12,7 +12,7 @@ Le framework de base prévoie un rayon de communication de 10 mètres pour un d�
 
 Comme Wi-Fi (802.11), 802.15.4 utilise au niveau 2 \textbf{CSMA/CA} pour éviter les collisions et intègre plusieurs mécanisme pour la sécurisation des communications. Certains appareils peuvent aussi intégrer des modules d'optimisation de la consommation, de détection de la qualité de la liaison ainsi que la puissance de réception. 
 
-Les appareils conforme à la norme 802.15.4 peuvent désormais se caler sur 3 bandes de fréquences :  868, 915 et 2450 MHz.
+Les appareils conforme à la norme 802.15.4 peuvent désormais se caler sur 3 bandes de fréquences :  868, 915 et 2450 MHz. Cela permet de se conformer plus facilement au norme en vigueur dans chaque pays qui ont des lois en la matière différente. Il n'y a pas de législation mondiale a ce propos.
 
 Le standard défini deux types de nœud :
 
@@ -22,6 +22,7 @@ Le second est le \textit{Reduced-Function Devices} (RFD). Ils sont prévues pour
 
 \subsubsection{6LoWPAN}
 
+6LoWPAN est l'acronyme d'\textit{IPv6 over Low power Wireless Personal Area Networks}, ce veut dire Ipv6 au dessus de réseau personnelle sans-fil basse consommation. l'idée principale derrière ce protocole était d'amener IP à tous types d'appareils. 
 
 
 \begin{figure}[h]
@@ -31,3 +32,9 @@ Le second est le \textit{Reduced-Function Devices} (RFD). Ils sont prévues pour
 \caption{Comparaison de différents protocoles IoT}
 \label{comparison}
 \end{figure}
+
+En réalité IPv6 est plus une couche 2.5 que 3, en effet la couche 3 est IPv6. En fait, dans le cas de 6LowPAN la stack réseau ressemble plus à sa :
+
+-----Stack 6LoWPAN------
+
+
