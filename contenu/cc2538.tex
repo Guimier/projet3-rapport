@@ -47,7 +47,7 @@ C’est à cette occasion que nous avons rencontré le problème posé par les v
 
 \subparagraph{\textit{Unycast}}
 
-Les deux programmes d’exemple en \textit{unycast}, \texttt{unicast-receiver} et \textt{unicast-sender} sont conçus pour fonctionner ensemble : une des deux cartes a un rôle de serveur (\textit{receiver}), l’autre de client ((\textit{sender})).
+Les deux programmes d’exemple en \textit{unycast}, \texttt{unicast-receiver} et \texttt{unicast-sender} sont conçus pour fonctionner ensemble : une des deux cartes a un rôle de serveur (\textit{receiver}), l’autre de client ((\textit{sender})).
 Comme dans l’exemple de \textit{broadcast}, l’envoi et la réception de messages est indiquée sur le flux standard de sortie ; il sont en plus déjà numérotés.
 
 Cette architecture serveur-client utilise un mécanisme de services intégré à \emph{Contiki} sous le nom de \emph{servreg-hack} : ce processus se charge d’annoncer aux nœuds voisins qu’il fournit un service (identifié par un nombre entier), de retenir les services annoncés par ses voisins et de retransmettre ces annonces.
