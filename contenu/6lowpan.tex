@@ -37,7 +37,7 @@ Sur un réseau 6LoWPAN le \textit{border/edge router} réalise 3 actions :
 \item la génération et la maintient du réseau
 \end{enumerate}
 
-Ensuite l'un des énormes avantages de 6LoWPAN, du fait de l'utilisation d'IP, est le routage de niveau 3 (couche réseau). Avec 6LowPAN il n'y pas besoin de maintenir une connexion au niveau applicatif, au contraire de ZigBee, Z-Wave ou Bluetooth qui requiert des passerelles applicatives pour accéder à Internet. En d'autre terme, l'équivalent du \textit{edge router} doit comprendre les protocoles utilisés au niveau applicatif. Cela réduit fortement la charge de travail du routeur.
+Ensuite l'un des énormes avantages de 6LoWPAN, du fait de l'utilisation d'IP, est le routage de niveau 3 (couche réseau). Avec 6LoWPAN il n'y pas besoin de maintenir une connexion au niveau applicatif, au contraire de ZigBee, Z-Wave ou Bluetooth qui requiert des passerelles applicatives pour accéder à Internet. En d'autre terme, l'équivalent du \textit{edge router} doit comprendre les protocoles utilisés au niveau applicatif. Cela réduit fortement la charge de travail du routeur.
 
 Voici une comparaison des différentes piles utilisées par les protocoles cités précédemment : 
 
@@ -50,7 +50,7 @@ Voici une comparaison des différentes piles utilisées par les protocoles cité
 
 \todo[Mettre des observations pour zigbee et z-wave ?]
 
-En réalité 6LowPAN est plus une couche 2,5 que 3 ; en effet la couche 3 est IPv6. En fait, dans le cas de 6LowPAN la pile réseau ressemble plus à ceci :
+En réalité 6LoWPAN est plus une couche 2,5 que 3 ; en effet la couche 3 est IPv6. En fait, dans le cas de 6LoWPAN la pile réseau ressemble plus à ceci :
 
 \begin{figure}[H]
 \centering
@@ -79,7 +79,11 @@ Dans le cas du \textit{mesh-under} (couche 2), le routage des données est trans
 
 D'un autre côté, le routage de niveau 3 (\textit{route-over}) fait en sorte que chaque saut représente un routeur IP. Son utilisation est favorable dans le cas de grand réseau et dans l'optique de l'agrandissement de ce dernier. 
 
-Dans le cas de 6LoWPAN, le protocole de routage le plus utilisé 
+Dans le cas de 6LoWPAN, le protocole de routage de niveau 3 le plus utilisé est RPL (se prononce "ripple"). En comparaison de \textit{mesh-under}, ce type de routage peut permettre d'utiliser les protocoles qui ont pour standard la stack TCP/IP.
+
+\textit{Routing Protocol for Low-power and Lossy network} (RPL) procure un mécanisme pour optimiser le multipoint-to-point (différents capteurs qui veulent joindre le même serveur) et de la même manière le point-to-multipoint (broadcast/multicast).
+
+
 
  
 --
