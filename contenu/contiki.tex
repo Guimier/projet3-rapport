@@ -4,8 +4,21 @@
 
 \emph{Contiki} se présente sous la forme d’une machine virtuelle \emph{Ubuntu} où sont préinstallées les paquets ou les sources de divers logiciels utiles au développement d’application pour des cartes électroniques.
 
-\todo[description installation + images]
+La VM se trouve sur le site de \emph{Contiki} (\url{http://www.contiki-os.org/download.html}), une fois télécharger, on se retrouve avec une VM au format \emph{VMWare}, ce qui fait quelle n'est pas compatible avec \emph{VirtualBox}.
+Si on veut vraiment travailler avec \emph{VirtualBox} alors \emph{VMWare} propose un outil de conversion qui permet de convertir la VM dans une format open-source, le \texttt{ova}.
 
+Il faut donc installer les deux outils puis dans un terminal (ou une invite de commande) entrer :
+\begin{verbatim}
+./ovftool [original .vmx location and filename]
+	[new .ova location and filename]
+\end{verbatim}
+Ce qui peut donner sous un Linux :
+\begin{verbatim}
+./ovftool ~/Download/contiki.vmx ~/Download/contiki.ova
+\end{verbatim}
+
+Une fois l'opération terminé on peut alors importer la VM sur \emph{VirtualBox} qui fonctionnera exactement de la même manière que sur \emph{VMWare}.
+ 
 \subsubsection{Cooja}
 
 \emph{Contiki} inclue un logiciel pour la simulation d’une communication entre plusieurs objets connectés, \emph{Cooja}.
