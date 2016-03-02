@@ -81,12 +81,20 @@ D'un autre côté, le routage de niveau 3 (\textit{route-over}) fait en sorte qu
 
 Dans le cas de 6LoWPAN, le protocole de routage de niveau 3 le plus utilisé est RPL (se prononce "ripple"). En comparaison de \textit{mesh-under}, ce type de routage peut permettre d'utiliser les protocoles qui ont pour standard la stack TCP/IP.
 
-\textit{Routing Protocol for Low-power and Lossy network} (RPL) procure un mécanisme pour optimiser le multipoint-to-point (différents capteurs qui veulent joindre le même serveur) et de la même manière le point-to-multipoint (broadcast/multicast).
+\textit{Routing Protocol for Low-power and Lossy network} (RPL) procure un mécanisme pour optimiser le \textit{multipoint-to-point} (différents capteurs qui veulent joindre le même serveur) et de la même manière le \textit{point-to-multipoint} (\textit{broadcast/multicast}).
 
 
+RPL supporte deux modes de routages : 
+\begin{itemize}
+\item \textit{storing mode}
+\item \textit{non-storing mode}
+\end{itemize}
 
- 
---
+En \textit{storing mode}, tous les appareils qui agissent comme routeur conserve une table de routage et une table de voisinage. La table de routage est utilisé pour sauvegarder les routes vers les différents appareils du réseau et la table de voisinage sert à garder une trace des voisins de l'équipement. 
+
+Pour l'autre mode de fonctionnement, seul le \textit{border router} conserve une table de routage, ce qui permet d'utiliser du \textit{source routing}. Cela signifie que le paquet doit inclure la route complète pour atteindre sa destination. Par exemple, quand un appareil veut envoyer un paquet à un autre appareil du réseau 6LoWPAN, il envoie les données au \textit{border router} qui regarde dans sa table de routage, ajoute la route au paquet puis envoie le paquet sur le réseau.
+
+le \textit{storing mode} de fonctionnement impose d'avoir des équipement plus robuste alors que l'autre augmente le nombre de saut pour la transmission du paquet ce qui peut potentiellement surcharger le réseau.
 
 L'un des avantages d'IPv6 est l'auto-gestion des adresses : un appareil peut générer automatiquement son adresse sans avoir recours à un serveur DHCP. Le protocole \textbf{NDP} (\textit{Neighbor Discovery Protocol}) permet d'obtenir une adresse unique dans le réseau en évitant les conflits.
 
