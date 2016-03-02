@@ -14,7 +14,7 @@ La première carte que nous avons utilisé est la CC 2538 de \emph{Texas Instrum
 
 \paragraph{Installation sur les cartes}
 
-\emph{Contiki} fournit un script \emph{Python} pour installer un programme sur une carte CC 2538, appelé \emph{cc2538-bsl} \todo[référence documentation], qui est intégré dans le \texttt{Makefile}.
+\emph{Contiki} fournit un script \emph{Python} pour installer un programme sur une carte CC 2538, appelé \emph{cc2538-bsl}, qui est intégré dans le \texttt{Makefile} \citeweb{contiki-cc2538}.
 Nous avons initialement suivi les étapes décrites dans sa documentation pour configurer la communication avec les cartes CC 25358, mais le résultat a invariablement été un message d’erreur indiquant que la carte ne répondait pas aux solicitations du script (\cref{bsl-error}).
 
 \begin{figure}
@@ -24,9 +24,17 @@ Nous avons initialement suivi les étapes décrites dans sa documentation pour c
 \label{bsl-error}
 \end{figure}
 
+La lecture de la documentation de \emph{cc2538-bsl} \citeweb{bsl} ne nous a pas permis de trouver la cause du problème.
+À partir des informations qui y étaient données, nous avons essayé de savoir si le \textit{bootloader} mentionné pouvait ne pas avoir été correctement configuré, grâce aux documentation de la CC 2538 \cite{cc2538-user-guide} et de la SmartRF06 \cite{smartrf06-user-guide}.
+Les informations des ces documents à ce sujet étaient essentiellement similaires à celle que nous avions déjà.
+
 Nous nous sommes alors tournés vers le logiciel développé par TI, \emph{FlashProgrammer} (\cref{flashprogrammer}).
 Celui-ci ne fonctionnant que sur un système Windows, nous l’avons installé sur la machine hôte de la machine virtuelle.
+\emph{FlashProgrammer} a fonctionné immédiatement, montrant que la carte n’était pas en cause.
+Nous ne savons toujours pas précisément quel était le problème, mais il est très probablement localisé soit dans \emph{cc2538-bsl}, soit dans la connexion USB virtuelle établie par \emph{VirtualBox}.
+
 Afin de transmettre facilement les fichiers compilés par \emph{Contiki}, nous avons utilisé les outils de partage de dossier proposés par \emph{VirtualBox}.
+Après configuration des droits d’accès sur la machine virtuelle, la commande \texttt{cp} suffisait pour avoir les fichiers à un endroit où \emph{FlashProgrammer} pouvait aller les chercher.
 
 \begin{figure}
 \centering
@@ -48,7 +56,7 @@ Ce programme utilise plusieurs fonctionnalités de la carte de développement \e
 \paragraph{Communication UDP}
 
 Afin de nous familiariser avec la pile réseau de \emph{Contiki}, nous avons ensuite compilé et exécuté les programmes de l’exemple classé dans le dossier \url{ipv6/simple-udp-rpl}.
-Cet exemple est constitué de trois programmes qui échangent des messages en UDP sur 6LowPAN.
+Cet exemple est constitué de trois programmes qui échangent des messages en UDP sur 6LoWPAN.
 
 Tous ces programmes envoient leurs messages à des instants aléatoires de chacun des intervales consécutifs de vingt secondes suivant le démarrage du programme, ce qui assure un temps moyen de ving secondes entre les messages.
 Nous n’avons pas trouvé de documentation pour ce choix, mais on peut supposer qu’il réduit les problèmes de collisions.
@@ -67,7 +75,7 @@ Cette modification nous a permis de constater qu’un nombre non négligeable de
 Les deux programmes d’exemple en \textit{unicast}, \texttt{unicast-receiver} et \texttt{unicast-sender} sont conçus pour fonctionner ensemble : une des deux cartes a un rôle de serveur (\textit{receiver}), l’autre de client ((\textit{sender})).
 Comme dans l’exemple de \textit{broadcast}, l’envoi et la réception de messages est indiquée sur le flux standard de sortie ; il sont en plus déjà numérotés.
 
-Cette architecture serveur-client utilise un mécanisme de services intégré à \emph{Contiki} sous le nom de \emph{servreg-hack} : ce processus se charge d’annoncer aux nœuds voisins qu’il fournit un service (identifié par un nombre entier), de retenir les services annoncés par ses voisins et de retransmettre ces annonces.
+Cette architecture serveur-client utilise un mécanisme de services intégré à \emph{Contiki} sous le nom de \emph{servreg-hack} \citeweb{servreg-hack} : ce processus se charge d’annoncer aux nœuds voisins qu’il fournit un service (identifié par un nombre entier), de retenir les services annoncés par ses voisins et de retransmettre ces annonces.
 Il permet ainsi de ne pas coder en dur dans le code du programme les adresses IP, rendant possible l’évolution d’un réseau d’objets connectés sans recompilation de tous les programmes lors d’un changement dans la répartition des tâches.
 
 \paragraph{Développement d’un programme d’action à distance}
@@ -89,4 +97,4 @@ Nous avions dans un premier temps imaginé n’envoyer au serveur des requêtes 
 Plus précisément, le client envoie deux types de demandes de mises à jour (indifférenciables du point de vue du serveur) : lorsque l’utilisateur change l’état des LEDs en appuyant sur un des boutons, celui-ci est immédiatement envoyé au serveur afin que la mise à jour soit le plus rapide possible ; pour ne pas laisser le serveur dans un état incohérent trop longtemps si ce message de modification est perdu, l’état est de nouvaeu envoyé toutes les dix secondes.
 
 Les implémentations initiales de ces deux types d’envois étaient indépendantes temporellement : les messages de rappel étaient envoyés exactement toutes les dix secondes, quelles que soient les actions de l’utilisateur.
-Afin d’éviter d’encombrer la pile 6LowPAN et le canal hertzien inutilement avec une mise à jour de rappel suivant immédiatement la mise à jour de changement, le compteur temporel des mises à jour de rappel est désormais réinitialisé systématiquement lors d’une action de l’utilisateur.
+Afin d’éviter d’encombrer la pile 6LoWPAN et le canal hertzien inutilement avec une mise à jour de rappel suivant immédiatement la mise à jour de changement, le compteur temporel des mises à jour de rappel est désormais réinitialisé systématiquement lors d’une action de l’utilisateur.

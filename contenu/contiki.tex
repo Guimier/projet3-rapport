@@ -8,9 +8,9 @@
 
 \subsubsection{Cooja}
 
-\emph{Contiki} inclue un logiciel pour la simulation d’une communication entre plusieurs objets connectés, \emph{Cooja} \todo[référence documentation].
+\emph{Contiki} inclue un logiciel pour la simulation d’une communication entre plusieurs objets connectés, \emph{Cooja}.
 
-Nous avons commencé notre utilisation de \emph{Contiki} en testant l’exécution d’un des programmes donnés en exemple.
+En suivant le tutoriel de prise en main \citeweb{getting-started}, nous avons commencé notre utilisation de \emph{Contiki} en testant l’exécution d’un des programmes donnés en exemple.
 \emph{Cooja} n’étant pas livré avec un émulateur pour la CC 2538, nous avons utilisé une simulation d’une \todo[skymote ?].
 
 \todo[copie d’écran de Cooja]
@@ -22,7 +22,7 @@ Comme l’utilisation du simulateur n’était pas primordiale dans notre projet
 \subsubsection{Architecture des programmes}
 
 Les programmes compilés avec \emph{Contiki} sont constitué d’un unique exécutable qui sera installé dans la mémoire de la carte cible.
-Afin de faciliter le développement modulaire, les bibliothèques de \emph{Contiki} incluent un mécanisme de processus légers à ordonnancement coopératif.
+Afin de faciliter le développement modulaire, les bibliothèques de \emph{Contiki} incluent un mécanisme de processus légers à ordonnancement coopératif \citeweb{protothreads}.
 
 \paragraph{Processus}
 
