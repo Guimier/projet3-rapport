@@ -30,7 +30,6 @@ Dans le réseau chaque équipement se voit attribuer un identifiant de 16 bits u
 Aussi, 6LoWPAN n'est spécifié qu'avec IPv6, ce qui fait que l'utilisation d'IPv4 dans un réseau utilisant 6LoWPAN est impossible. Grâce à cela les \textit{edge routers} peuvent utiliser des mécanisme de transition pour connecter des réseaux 6LoWPAN et IPv4 comme \textbf{NAT64}.
 
 Sur un réseau 6LoWPAN le \textit{border/edge router} réalise 3 actions :
-
 \begin{enumerate}
 \item L'échange de données en les appareils du réseau local et l'Internet (une autre réseau IP).
 \item L'échange de données en local
@@ -64,7 +63,22 @@ Comme nous pouvons voir, 6LoWPAN fait la liaison entre 802.15.4 et IPv6. Au nive
 Au niveau applicatif, il est bon de noter que 6LoWPAN supporte HTTP, mais ne l'utilise que très peu à cause de la verbosité du langage. L'industrie a développé un protocole de messagerie plus adapté au nom de \textbf{COAP} (\textit{COnstrained Application Protocol}) qui est beaucoup plus adapté aux appareils basse consommation.
 
 % Compression des en-tête %
+Du fait de la nécessiter d'optimiser la bande passante, et les données que l'on envoie, la compression des en-têtes est un enjeu essentiel de 6LoWPAN. De manière traditionnelle, la compression se fait quand plusieurs condition sont réunis, si le flux de données entre deux équipements est stable.
 
+La compression des en-tête est très efficace dans le cas de réseau statique mais perd son efficacité sur des réseaux dynamique où l'en-tête doit être décompressée à chaque saut.
+
+Quant on sait qu'une en-tête IPv6 classique fait 40 octets et que la longueur maximale d'une trame 802.15.4 est de 127 octets, il est plus que nécessaire de réduire la taille des en-têtes.
+
+Dans le cas de 6LoWPAN, on peut atteindre 3 seuils de compressions :
+\begin{itemize}
+\item 95\% (2 octets)
+\item 70\% (12 octets
+\item 50\% (20 octets)
+\end{itemize}
+
+Pour être dans le cas optimale (compression de 95\%), il faut que la communication se fasse entre deux appareils dans le même réseaux 6LoWPAN (point à point), qui utilise des adresses de lien local.
+
+Pour obtenir une compression de 70\%, il faut connaitre l'identifiant réseau (de couche 2) de l'appareil dans le réseau et dans le pire cas (50\%) on ne connait que sont adresse IPv6.
 
 Dans le cas de 6LoWPAN il existe deux types de routage, celui de niveau 3 et celui de niveau 2. Le premier utilise l'adresse IPv6 et le second l'adresse de niveau 2 (l'identifiant 802.15.4).
 
@@ -75,14 +89,13 @@ Dans le cas de 6LoWPAN il existe deux types de routage, celui de niveau 3 et cel
 \label{routing}
 \end{figure}
 
-Dans le cas du \textit{mesh-under} (couche 2), le routage des données est transparent, donc on peut considérer le réseau comme un sous-réseau IP. Le seule routeur IP dans cette configuration est l'\textit{edge router}. Un domaine de \textit{broadcast} est quand même défini pour garder la compatibilité avec le protocole IPv6 et  conserver la détection de duplication d'adresse (DAD, \textit{Duplication Address Detection}), car ce type de message est diffusé sur tout le réseau et donc génère beaucoup de trafic. On privilégiera ce type de routage pour les réseaux de petite taille.
+Pour le  \textit{mesh-under} (couche 2), le routage des données est transparent, donc on peut considérer le réseau comme un sous-réseau IP. Le seule routeur IP dans cette configuration est l'\textit{edge router}. Un domaine de \textit{broadcast} est quand même défini pour garder la compatibilité avec le protocole IPv6 et  conserver la détection de duplication d'adresse (DAD, \textit{Duplication Address Detection}), car ce type de message est diffusé sur tout le réseau et donc génère beaucoup de trafic. On privilégiera ce type de routage pour les réseaux de petite taille.
 
 D'un autre côté, le routage de niveau 3 (\textit{route-over}) fait en sorte que chaque saut représente un routeur IP. Son utilisation est favorable dans le cas de grand réseau et dans l'optique de l'agrandissement de ce dernier. 
 
 Dans le cas de 6LoWPAN, le protocole de routage de niveau 3 le plus utilisé est RPL (se prononce "ripple"). En comparaison de \textit{mesh-under}, ce type de routage peut permettre d'utiliser les protocoles qui ont pour standard la stack TCP/IP.
 
 \textit{Routing Protocol for Low-power and Lossy network} (RPL) procure un mécanisme pour optimiser le \textit{multipoint-to-point} (différents capteurs qui veulent joindre le même serveur) et de la même manière le \textit{point-to-multipoint} (\textit{broadcast/multicast}).
-
 
 RPL supporte deux modes de routages : 
 \begin{itemize}
