@@ -32,14 +32,14 @@ Aussi, 6LoWPAN n'est spécifié qu'avec IPv6, ce qui fait que l'utilisation d'IP
 Sur un réseau 6LoWPAN le \textit{border/edge router} réalise 3 actions :
 
 \begin{enumerate}
-\item L'échange de données en les appareils du réseau local et l'Internet (une autre réseau IP).
-\item L'échange de données en local
-\item la génération et la maintient du réseau
+	\item l'échange de données entre les appareils du réseau local et l'Internet (un autre réseau IP) ;
+	\item l'échange de données en local ;
+	\item la génération et la maintient du réseau.
 \end{enumerate}
 
 Ensuite l'un des énormes avantages de 6LoWPAN, du fait de l'utilisation d'IP, est le routage de niveau 3 (couche réseau). Avec 6LowPAN il n'y pas besoin de maintenir une connexion au niveau applicatif, au contraire de ZigBee, Z-Wave ou Bluetooth qui requiert des passerelles applicatives pour accéder à Internet. En d'autre terme, l'équivalent du \textit{edge router} doit comprendre les protocoles utilisés au niveau applicatif. Cela réduit fortement la charge de travail du routeur.
 
-Voici une comparaison des différentes piles utilisées par les protocoles cités précédemment : 
+La \cref{comparison} donne une comparaison des différentes piles utilisées par les protocoles cités précédemment.
 
 \begin{figure}[H]
 \centering
@@ -50,7 +50,7 @@ Voici une comparaison des différentes piles utilisées par les protocoles cité
 
 \todo[Mettre des observations pour zigbee et z-wave ?]
 
-En réalité 6LowPAN est plus une couche 2,5 que 3 ; en effet la couche 3 est IPv6. En fait, dans le cas de 6LowPAN la pile réseau ressemble plus à ceci :
+En réalité 6LowPAN est plus une couche 2,5 que 3 ; en effet la couche 3 est IPv6. En fait, dans le cas de 6LowPAN la pile réseau ressemble plus à celle présentée dans la \cref{stack6lowpan}.
 
 \begin{figure}[H]
 \centering
@@ -66,7 +66,7 @@ Au niveau applicatif, il est bon de noter que 6LoWPAN supporte HTTP, mais ne l'u
 % Compression des en-tête %
 
 
-Dans le cas de 6LoWPAN il existe deux types de routage, celui de niveau 3 et celui de niveau 2. Le premier utilise l'adresse IPv6 et le second l'adresse de niveau 2 (l'identifiant 802.15.4).
+Dans le cas de 6LoWPAN il existe deux types de routage (\cref{routing}), celui de niveau 3 et celui de niveau 2. Le premier utilise l'adresse IPv6 et le second l'adresse de niveau 2 (l'identifiant 802.15.4).
 
 \begin{figure}[H]
 \centering
@@ -77,6 +77,6 @@ Dans le cas de 6LoWPAN il existe deux types de routage, celui de niveau 3 et cel
 
 L'un des avantages d'IPv6 est l'auto-gestion des adresses : un appareil peut générer automatiquement son adresse sans avoir recours à un serveur DHCP. Le protocole \textbf{NDP} (\textit{Neighbor Discovery Protocol}) permet d'obtenir une adresse unique dans le réseau en évitant les conflits.
 
-La sécurité dans l'IoT est un véritable défi ; en effet, à cause du nombre de nœuds avec des performances assez faible, il y beaucoup de point d'entré pour les attaques de l'extérieur. Aussi l'un des points critiques dans l'IoT est la nature des données, qui dans certains cas peuvent être cruciales si elles servent à commander des alarmes ou des portes d'accès.
+La sécurité dans l'IoT est un véritable défi ; en effet, à cause du nombre de nœuds avec des performances assez faible, il y beaucoup de points d'entrée pour les attaques de l'extérieur. Aussi l'un des points critiques dans l'IoT est la nature des données, qui dans certains cas peuvent être cruciales si elles servent à commander des alarmes ou des portes d'accès.
 
 Du coup, 6LoWPAN tire partie de l'\textbf{AES-128} qui est définie dans 802.15.4. Avec l'utilisation de TLS ou de DTLS on peut aussi sécuriser les échanges au niveau de la couche transport, mais cela implique d'avoir des équipements avec une certaine puissance. Les cartes TI (\textbf{CC 2538} fournis par notre tuteur ont été développées spécialement dans cette optique de sécurité).
