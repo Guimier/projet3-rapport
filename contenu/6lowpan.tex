@@ -60,4 +60,16 @@ Comme nous pouvons voir, 6LoWPAN fait la liaison entre 802.15.4 et IPv6. Au nive
 
 Au niveau applicatif, il est bon de noter que 6LoWPAN supporte HTTP, mais ne l'utilise que très peux a cause de la verbosité du langage. L'industrie a développé un protocole de messagerie plus adapté au nom de \textbf{COAP} (\textit{COnstrained Application Protocol}) qui est beaucoup plus adapté aux appareils basse consommation.
 
+% Compression des en-tête %
 
+% Routage %
+
+% Autoconfiguration %
+
+L'un des avantages d'IPv6 est l'auto-gestion des adresses, un appareil peut générer automatiquement son adresse sans avoir recours à un DHCP. Le protocole \textbf{NDP} (\textit{Neighbor Discovery Protocol}) permet d'obtenir cette adresse unique dans le réseau, ce qui évitera les conflits.
+
+% Securité %
+
+La sécurité dans l'IoT est un véritable challenge, en effet, à cause du nombre de nœuds avec des performances assez faible, il y beaucoup de point d'entré pour les attaques de l'extérieur. Aussi l'un des points critiques dans l'IoT est la nature des données, qui dans certains cas peuvent être cruciale sur elles servent à commander des alarmes ou des portes d'accès.
+
+Du coup, 6LoWPAN tire partie de l'\textbf{AES-128} qui est définie dans 802.15.4. Avec l'utilisation de TLS ou de DTLS on peut aussi sécuriser les échanges au niveau de la couche transport. Mais cela implique d'avoir des équipements avec une certaine puissance. Les cartes TI fournis par notre tuteur ont été développé spécialement dans cette optique de sécurité (\textbf{cc2538}).
