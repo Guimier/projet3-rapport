@@ -35,7 +35,7 @@ Comme l’utilisation du simulateur n’était pas primordiale dans notre projet
 \subsubsection{Architecture des programmes}
 
 Les programmes compilés avec \emph{Contiki} sont constitué d’un unique exécutable qui sera installé dans la mémoire de la carte cible.
-Afin de faciliter le développement modulaire, les bibliothèques de \emph{Contiki} incluent un mécanisme de processus légers à ordonnancement coopératif \citeweb{protothreads}.
+Afin de faciliter le développement modulaire, les bibliothèques de \emph{Contiki} incluent un mécanisme de processus légers à ordonnancement coopératif \citeweb{processes}.
 
 \paragraph{Processus}
 
@@ -46,7 +46,7 @@ Le mécanisme utilisé, conçu pour économiser la mémoire, implique en effet d
 	\item certaines portions du code peuvent être exécutée à des moments inattendus.
 \end{itemize}
 
-En effet, les processus sont implémentés sous forme de \emph{protothreads}, c’est-à-dire de \emph{threads} sans sauvegarde de la pile \todo[référence documentation].
+En effet, les processus sont implémentés sous forme de \emph{protothreads}, c’est-à-dire de \emph{threads} sans sauvegarde de la pile \citeweb{protothreads}.
 Chaque processus est une procédure (en pratique un pointeur de fonction) qui est appelée à chaque fois que le processus est activé.
 Les processus rendent la main à l’ordonnanceur lorsque cette procédure se termine (instruction \texttt{return}).
 
@@ -61,7 +61,7 @@ En revanche, sa connaissance nous a été utile pour comprendre des blocages que
 
 \paragraph{\emph{Timers}}
 
-Un des processus fournis par \emph{Contiki} permet de manipuler le temps simplement : \emph{etimer} \todo[référence documentation ?].
+Un des processus fournis par \emph{Contiki} permet de manipuler le temps simplement : \emph{etimer} \citeweb{etimer}.
 Les autres processus peuvent enregistrer un \emph{timer} auprès de ce processus, qui est en charge d’émettre un événement lorsque celui-ci arrive à expiration.
 
 La macro \texttt{PROCESS\_WAIT\_EVENT\_UNTIL} permet d’attendre simplement l’événement émis à la fin du temps demandé, mais son utilisation dans les exemples (ajoutée à notre mauvaise compréhension des processus) nous a induits en erreur.
