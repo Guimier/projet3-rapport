@@ -2,33 +2,32 @@
 
 \subsection{L'IoT}
 
-\textit{L'Internet of Things}, que nous appellerons maintenant IoT pour le reste de ce rapport, se traduit littéralement comme l'Internet des Objets, mais qu'est-ce-qu'un objet? Dans le monde de l'IoT les objets peuvent se référer à des biens (comme des meubles ou de l'électroménager), des machines, des véhicules, des immeubles ou bien même à quelque chose d'organique comme un être vivant (Homme ou animal), une plante, des sols (pour les cultures).
+\textit{L'Internet of Things}, que nous appellerons IoT dans le reste de ce rapport, se traduit littéralement comme l'« Internet des objets », mais qu'est-ce-qu'un objet? Dans le monde de l'IoT les objets peuvent se référer à des biens (comme des meubles ou de l'électroménager), des machines, des véhicules, des immeubles ou bien même à quelque chose d'organique comme un être vivant (humain, animal ou plante) ou un sol (pour les cultures).
 
-Alors la question est : Comment pouvons nous tous connecter ? En effet, comment faire en sorte qu'une plante possède un accès réseau. C'est cela que l'IoT veut définir et représente, une connectivité pour tout.
+Alors la question est : Comment pouvons nous tout connecter ? En effet, comment faire en sorte qu'une plante possède un accès réseau ? C'est cela que l'IoT veut définir et représenter : une connectivité pour tout.
 
-Mais d'abord que veut dire le mot connecter ? Prenons l'exemple d'une chaise, le fait qu'elle soit connectée veut dire que je peux avoir accès à de l'information la concernant, depuis n'importe où, grâce à un accès à Internet, par exemple, est-elle occupée? Si oui, qui est assis dessus? Pour cela nous avons besoin de donner certains attributs de cette chaise, comme un numéro d'identification unique, une manière de la distinguée d'un autre objet. 
+Mais d'abord que veut dire le mot connecter ? Prenons l'exemple d'une chaise, le fait qu'elle soit connectée veut dire que on peut avoir accès à de l'information la concernant, depuis n'importe où, grâce à un accès à Internet ; par exemple, est-elle occupée ? Si oui, qui est assis dessus ? Pour cela il faut donner certains attributs de cette chaise, comme un numéro d'identification unique, une manière de la distinguer d'un autre objet. 
 
-Grâce à \textbf{IPv6}, nous pouvons maintenant affecter une adresse unique à tout sans limite réel car l'espace adressable est sans limite pratique (mais il y a bien sur une limite physique). IPv4 est déjà dépassée en terme de capacité d'adressage depuis longtemps mais grâce à des mécanismes comme le NAT/PAT, IPv4 est encore utilisé. Nous reviendrons sur IPv6 un peu plus tard dans ce rapport lors de notre présentation de 6LoWPAN.
+Grâce à \textbf{IPv6}, il est désormais possible d’affecter une adresse unique à tout objet sans limite réelle, car l'espace adressable est sans limite pratique (mais il y a bien sur une limite physique). IPv4 est dépassé en terme de capacité d'adressage depuis longtemps mais grâce à des mécanismes comme le NAT/PAT, IPv4 est encore utilisé. Nous reviendrons sur IPv6 un peu plus tard dans ce rapport lors de notre présentation de 6LoWPAN.
 
-Ensuite, nous avons besoins de donner à la chaise un moyen de communiquer avec le monde, soit de manière filaire ou sans fil grâce à des antennes. D'où la nécessiter des protocoles réseaux qui vont devoir transporter les informations, malheureusement ceux que nous utilisons dans la vie tous les jours ne sont pas vraiment adaptées (IPv4, IPv6, Wi-Fi, ...) à l'IoT, de part leur consommation électrique ou de bande-passante. C'est pourquoi de nouveaux protocoles ont vu le jour, spécialement adaptés à ces besoins. Certain se concentre sur la puissance d'émission et d'autre sur la fiabilité dans les milieux bruités, mais tous prennent en compte certaines contraintes de l'IoT.
+Ensuite, nous avons besoins de donner à la chaise un moyen de communiquer avec le monde, soit de manière filaire soit sans fil, grâce à des antennes. D'où la nécessité des protocoles réseaux qui vont devoir transporter les informations ; malheureusement ceux que nous utilisons dans la vie tous les jours ne sont pas vraiment adaptés (IPv4, IPv6, Wi-Fi, etc.) à l'IoT, à cause de leur consommation électrique ou de leur bande-passante. C'est pourquoi de nouveaux protocoles ont vu le jour, spécialement adaptés à ces besoins. Certains se concentrent sur la puissance d'émission et d'autres sur la fiabilité dans les milieux bruités, mais tous prennent en compte certaines contraintes de l'IoT.
 
-Aussi, nous parlons d'information et de données mais il faut bien les générer, pour cela nous utilisons différents types de capteurs, comme par example de pression pour savoir si notre chaise est occupé. Un autre type de capteur pourrait être une puce de localisation, ou bien même un capteur d'identification qui pourra nous dire qui est assis sur notre chaise et qui l'a été. De nos jours les capteurs sont extrêmement petits mais ont quand même certaines capacités comme de la mémoire, ce qui est très pratique en cas de coupure temporaire du réseaux, en effet, les données ne sont pas forcément perdue.
+Nous parlons d'information et de données mais il faut bien les générer. Pour cela nous utilisons différents types de capteurs, par example un capteur de pression pour savoir si la chaise est occupée. Un autre type de capteur pourrait être une puce de localisation, voire un capteur d'identification qui pourra nous dire qui est assis sur la chaise et qui l'a été. De nos jours les capteurs sont extrêmement petits mais ont quand même certaines capacités comme de la mémoire, ce qui est très pratique en cas de coupure temporaire du réseaux ; en effet, les données ne sont pas forcément perdues.
 
 \begin{figure}[H]
-\begin{center}
+\centering
 \includegraphics[width=15cm]{\rpDossier/images/capteurs.png}
-\end{center}
-\caption{Exemple de capteurs}
+\caption{Exemples de capteurs}
 \label{sensors}
 \end{figure}
 
-Quelles seront les impacts et les possibilités de l'IoT ? Nous ne sommes limités seulement par notre imagination car nous changeons l'approche de voir et de connecter les objets.
+Quelles seront les impacts et les possibilités de l'IoT ? Nous sommes limités seulement par notre imagination car nous changeons la façon de voir et de connecter les objets.
 
 % Monitor %
 
-Prenons quelques exemples pour montrer l'intérêt de l'IoT. Le \textit{monitoring} ne se résume pas aux réseaux et aux machines, nous pouvons aussi l'appliquer pour surveiller l'état d'un patient en médecine. Imaginons quelqu'un avec un problème cardiaque, il possède un pacemaker qui est "connecté", cela veut dire qu'une application sur son téléphone peut dire à cette personne l'état de son cœur, mais aussi à son hôpital. Dans le cas d'une défaillance, une alerte est lancée à l'hôpital qui peut envoyer immédiatement une ambulance, quant à la localisation ils peuvent utiliser un tracker GPS intégré au tout.
+Prenons quelques exemples pour montrer l'intérêt de l'IoT. Le \textit{monitoring} ne se résume pas qu’aux réseaux et aux machines, nous pouvons aussi l'appliquer pour surveiller l'état d'un patient en médecine. Imaginons quelqu'un avec un problème cardiaque, il possède un pacemaker qui est « connecté », cela veut dire qu'une application sur son téléphone peut dire à cette personne l'état de son cœur, mais aussi à son hôpital. Dans le cas d'une défaillance, une alerte est lancée à l'hôpital qui peut envoyer immédiatement une ambulance, en utilisant un tracker GPS intégré au tout pour localiser le patient.
 
-Grâce à des algorithmes puissants, nous pourrons même prédire un potentiel problème sans que le patient vienne faire des visites de contrôles régulières, son pacemaker enverra les données pour lui. Avec le nombre de personnes de plus de 65 qui va doubler dans peu de temps, la e-santé et la télé-médecine vont devenir un des plus gros secteurs de l'IoT. 
+Grâce à des algorithmes puissants, nous pourrons même prédire un problème potentiel sans que le patient vienne faire des visites de contrôles régulières, son pacemaker enverra les données pour lui. Avec le nombre de personnes agée de plus de 65 ans qui va doubler dans peu de temps, la e-santé et la télé-médecine vont devenir un des plus gros secteurs de l'IoT. 
 
 % Search  %
 
@@ -47,10 +46,9 @@ L'IoT permet aussi de déléguer du contrôle, toujours dans une optique d'optim
 Un autre marché que l'IoT va investir est la réalité augmentée (en particulier les jeux vidéo). En effet, en utilisant la réalité augmentée, nous pouvons superposer la réalité (filmée par une caméra) et le monde virtuel grâce à un traitement logiciel. L'IoT va simplement étendre le panel de fonctionnalité de manière infinie en permettant d'interagir avec l'environnement. Par example, il suffirait de lancer son application de réalité augmentée et de toucher l'objet avec lequel nous voulons interagir pour se voir proposer des actions. Le panel d'action se limite seulement à ce que le développeur veut laisser les gens faire.
 
 \begin{figure}[H]
-\begin{center}
+\centering
 \includegraphics[width=10cm]{\rpDossier/images/ariot.jpg}
-\end{center}
-\caption{Réalité augmentée + IoT}
+\caption{Réalité augmentée associée à l’IoT}
 \label{ariot}
 \end{figure}
 
