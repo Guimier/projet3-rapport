@@ -1,9 +1,22 @@
 \subsection{Cartes CC 2538}
 
-La première carte que nous avons utilisé est la CC 2538 de \emph{Texas Instruments} (TI), branchée sur le kit de développement \emph{SmartRF 06}.
+La première carte que nous avons utilisé est la CC 2538 de \emph{Texas Instruments} (TI), branchée sur le kit de développement \emph{SmartRF06}.
 
 \subsubsection{Présentation}
 
+\begin{figure}[H]
+\centering
+\includegraphics[width=8cm]{\rpDossier/images/cc2538.jpg}
+\caption{Carte CC 2538}
+\label{cc2538}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=12cm]{\rpDossier/images/smartrf06.jpg}
+\caption{Carte SmartRF06 pour le développement avec une CC 2538}
+\label{smartrf06}
+\end{figure}
 \todo[Images et descriptions]
 
 \subsubsection{Test des cartes}
@@ -17,7 +30,7 @@ La première carte que nous avons utilisé est la CC 2538 de \emph{Texas Instrum
 \emph{Contiki} fournit un script \emph{Python} pour installer un programme sur une carte CC 2538, appelé \emph{cc2538-bsl}, qui est intégré dans le \texttt{Makefile} \citeweb{contiki-cc2538}.
 Nous avons initialement suivi les étapes décrites dans sa documentation pour configurer la communication avec les cartes CC 25358, mais le résultat a invariablement été un message d’erreur indiquant que la carte ne répondait pas aux solicitations du script (\cref{bsl-error}).
 
-\begin{figure}
+\begin{figure}[H]
 \centering
 \todo[Copie de l’erreur]
 \caption{Erreur du script de flashage intégré}
@@ -36,7 +49,7 @@ Nous ne savons toujours pas précisément quel était le problème, mais il est 
 Afin de transmettre facilement les fichiers compilés par \emph{Contiki}, nous avons utilisé les outils de partage de dossier proposés par \emph{VirtualBox}.
 Après configuration des droits d’accès sur la machine virtuelle, la commande \texttt{cp} suffisait pour avoir les fichiers à un endroit où \emph{FlashProgrammer} pouvait aller les chercher.
 
-\begin{figure}
+\begin{figure}[H]
 \centering
 \todo[Copie d’écran de l’interface de flashage]
 \caption{\emph{FlashProgrammer}, logiciel de flashage externe à \emph{Contiki}}
