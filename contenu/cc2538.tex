@@ -27,7 +27,13 @@ Afin de transmettre facilement les fichiers compilés par \emph{Contiki}, nous a
 
 \paragraph{Manipulations des LEDs et boutons}
 
-\todo[Description programme]
+Nous avons commencé par tester l’exemple conçu spécifiquement pour la CC 2538, classé dans le dossier \texttt{cc2538dk}.
+Ce programme utilise plusieurs fonctionnalités de la carte de développement \emph{SmartRF 06}, mais nous avons concentré notre étude sur celles utiles pour le développement de notre démonstrateur :
+
+\begin{itemize}
+	\item le programme utilise les boutons pour sélectionner la fonctionnalité à tester, que nous avons utilisé comme entrée dans notre programme de démonstration ;
+	\item plusieurs des démonstrations font clignoter les LEDs, que nous avons utilisées comme sortie de notre programme de démonstration.
+\end{itemize}
 
 \paragraph{Communication UDP}
 
@@ -55,4 +61,21 @@ Il permet ainsi de ne pas coder en dur dans le code du programme les adresses IP
 
 \paragraph{Développement d’un programme d’action à distance}
 
-\todo[Fonctionnalités, architecture]
+Nous sommes repartis de ces deux exemples pour concevoir les deux programmes de démonstration suivants.
+
+\begin{description}
+	\item[\texttt{leds-slave}]
+		La carte exécutant ce programme a le rôle de serveur d’affichage ; elle expose ce service grâce au mécanisme fourni par \emph{servreg-hack}.
+		Lorsqu’un client la solicite, elle met à jour l’état de ses LEDs en fonction de la demande.
+	\item[\texttt{leds-master}]
+		La carte exécutant ce programme réagit aux actions de l’utilisateur sur ses boutons en envoyant des requêtes de modification au serveur d’affichage.
+		Afin de pouvoir suivre la mise à jour des LEDs sur la carte serveur, ce programme met aussi à jour ses propres LEDs pour refléter l’état dans lequel le serveur devrait se trouver un fois à jour.
+\end{description}
+
+La carte exécutant ce dernier programme permet à l’utilisateur de modifier un à un l’état des quatre LEDs, en faisant correspondre l’appui sur un chacun quatre boutons directionels avec le changement d’état d’une des LEDs.
+
+Nous avions dans un premier temps imaginé n’envoyer au serveur des requêtes ne contenant que les modifications à effectuer, mais comme les messages entre les cartes étaient trop souvent perdus, nous avons décidé d’envoyer un état complet à chaque mise à jour.
+Plus précisément, le client envoie deux types de demandes de mises à jour (indifférenciables du point de vue du serveur) : lorsque l’utilisateur change l’état des LEDs en appuyant sur un des boutons, celui-ci est immédiatement envoyé au serveur afin que la mise à jour soit le plus rapide possible ; pour ne pas laisser le serveur dans un état incohérent trop longtemps si ce message de modification est perdu, l’état est de nouvaeu envoyé toutes les dix secondes.
+
+Les implémentations initiales de ces deux types d’envois étaient indépendantes temporellement : les messages de rappel étaient envoyés exactement toutes les dix secondes, quelles que soient les actions de l’utilisateur.
+Afin d’éviter d’encombrer la pile 6LowPAN et le canal hertzien inutilement avec une mise à jour de rappel suivant immédiatement la mise à jour de changement, le compteur temporel des mises à jour de rappel est désormais réinitialisé systématiquement lors d’une action de l’utilisateur.
