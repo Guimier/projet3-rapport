@@ -30,14 +30,13 @@ Dans le réseau chaque équipement se voit attribuer un identifiant de 16 bits u
 Aussi, 6LoWPAN n'est spécifié qu'avec IPv6, ce qui fait que l'utilisation d'IPv4 dans un réseau utilisant 6LoWPAN est impossible. Grâce à cela les \textit{edge routers} peuvent utiliser des mécanisme de transition pour connecter des réseaux 6LoWPAN et IPv4 comme \textbf{NAT64}.
 
 Sur un réseau 6LoWPAN le \textit{border/edge router} réalise 3 actions :
-
 \begin{enumerate}
 	\item l'échange de données entre les appareils du réseau local et l'Internet (un autre réseau IP) ;
 	\item l'échange de données en local ;
 	\item la génération et la maintient du réseau.
 \end{enumerate}
 
-Ensuite l'un des énormes avantages de 6LoWPAN, du fait de l'utilisation d'IP, est le routage de niveau 3 (couche réseau). Avec 6LowPAN il n'y pas besoin de maintenir une connexion au niveau applicatif, au contraire de ZigBee, Z-Wave ou Bluetooth qui requiert des passerelles applicatives pour accéder à Internet. En d'autre terme, l'équivalent du \textit{edge router} doit comprendre les protocoles utilisés au niveau applicatif. Cela réduit fortement la charge de travail du routeur.
+Ensuite l'un des énormes avantages de 6LoWPAN, du fait de l'utilisation d'IP, est le routage de niveau 3 (couche réseau). Avec 6LoWPAN il n'y pas besoin de maintenir une connexion au niveau applicatif, au contraire de ZigBee, Z-Wave ou Bluetooth qui requiert des passerelles applicatives pour accéder à Internet. En d'autre terme, l'équivalent du \textit{edge router} doit comprendre les protocoles utilisés au niveau applicatif. Cela réduit fortement la charge de travail du routeur.
 
 La \cref{comparison} donne une comparaison des différentes piles utilisées par les protocoles cités précédemment.
 
@@ -50,7 +49,7 @@ La \cref{comparison} donne une comparaison des différentes piles utilisées par
 
 \todo[Mettre des observations pour zigbee et z-wave ?]
 
-En réalité 6LowPAN est plus une couche 2,5 que 3 ; en effet la couche 3 est IPv6. En fait, dans le cas de 6LowPAN la pile réseau ressemble plus à celle présentée dans la \cref{stack6lowpan}.
+En réalité 6LoWPAN est plus une couche 2,5 que 3 ; en effet la couche 3 est IPv6. En fait, dans le cas de 6LoWPAN la pile réseau ressemble plus à celle présentée dans la \cref{stack6lowpan}.
 
 \begin{figure}[H]
 \centering
@@ -64,7 +63,22 @@ Comme nous pouvons voir, 6LoWPAN fait la liaison entre 802.15.4 et IPv6. Au nive
 Au niveau applicatif, il est bon de noter que 6LoWPAN supporte HTTP, mais ne l'utilise que très peu à cause de la verbosité du langage. L'industrie a développé un protocole de messagerie plus adapté au nom de \textbf{COAP} (\textit{COnstrained Application Protocol}) qui est beaucoup plus adapté aux appareils basse consommation.
 
 % Compression des en-tête %
+Du fait de la nécessiter d'optimiser la bande passante, et les données que l'on envoie, la compression des en-têtes est un enjeu essentiel de 6LoWPAN. De manière traditionnelle, la compression se fait quand plusieurs condition sont réunis, si le flux de données entre deux équipements est stable.
 
+La compression des en-tête est très efficace dans le cas de réseau statique mais perd son efficacité sur des réseaux dynamique où l'en-tête doit être décompressée à chaque saut.
+
+Quant on sait qu'une en-tête IPv6 classique fait 40 octets et que la longueur maximale d'une trame 802.15.4 est de 127 octets, il est plus que nécessaire de réduire la taille des en-têtes.
+
+Dans le cas de 6LoWPAN, on peut atteindre 3 seuils de compressions :
+\begin{itemize}
+\item 95\% (2 octets)
+\item 70\% (12 octets
+\item 50\% (20 octets)
+\end{itemize}
+
+Pour être dans le cas optimale (compression de 95\%), il faut que la communication se fasse entre deux appareils dans le même réseaux 6LoWPAN (point à point), qui utilise des adresses de lien local.
+
+Pour obtenir une compression de 70\%, il faut connaitre l'identifiant réseau (de couche 2) de l'appareil dans le réseau et dans le pire cas (50\%) on ne connait que sont adresse IPv6.
 
 Dans le cas de 6LoWPAN il existe deux types de routage (\cref{routing}), celui de niveau 3 et celui de niveau 2. Le premier utilise l'adresse IPv6 et le second l'adresse de niveau 2 (l'identifiant 802.15.4).
 
@@ -74,6 +88,26 @@ Dans le cas de 6LoWPAN il existe deux types de routage (\cref{routing}), celui d
 \caption{Les 2 type de routage avec 6LoWPAN}
 \label{routing}
 \end{figure}
+
+Pour le  \textit{mesh-under} (couche 2), le routage des données est transparent, donc on peut considérer le réseau comme un sous-réseau IP. Le seule routeur IP dans cette configuration est l'\textit{edge router}. Un domaine de \textit{broadcast} est quand même défini pour garder la compatibilité avec le protocole IPv6 et  conserver la détection de duplication d'adresse (DAD, \textit{Duplication Address Detection}), car ce type de message est diffusé sur tout le réseau et donc génère beaucoup de trafic. On privilégiera ce type de routage pour les réseaux de petite taille.
+
+D'un autre côté, le routage de niveau 3 (\textit{route-over}) fait en sorte que chaque saut représente un routeur IP. Son utilisation est favorable dans le cas de grand réseau et dans l'optique de l'agrandissement de ce dernier. 
+
+Dans le cas de 6LoWPAN, le protocole de routage de niveau 3 le plus utilisé est RPL (se prononce "ripple"). En comparaison de \textit{mesh-under}, ce type de routage peut permettre d'utiliser les protocoles qui ont pour standard la stack TCP/IP.
+
+\textit{Routing Protocol for Low-power and Lossy network} (RPL) procure un mécanisme pour optimiser le \textit{multipoint-to-point} (différents capteurs qui veulent joindre le même serveur) et de la même manière le \textit{point-to-multipoint} (\textit{broadcast/multicast}).
+
+RPL supporte deux modes de routages : 
+\begin{itemize}
+\item \textit{storing mode}
+\item \textit{non-storing mode}
+\end{itemize}
+
+En \textit{storing mode}, tous les appareils qui agissent comme routeur conserve une table de routage et une table de voisinage. La table de routage est utilisé pour sauvegarder les routes vers les différents appareils du réseau et la table de voisinage sert à garder une trace des voisins de l'équipement. 
+
+Pour l'autre mode de fonctionnement, seul le \textit{border router} conserve une table de routage, ce qui permet d'utiliser du \textit{source routing}. Cela signifie que le paquet doit inclure la route complète pour atteindre sa destination. Par exemple, quand un appareil veut envoyer un paquet à un autre appareil du réseau 6LoWPAN, il envoie les données au \textit{border router} qui regarde dans sa table de routage, ajoute la route au paquet puis envoie le paquet sur le réseau.
+
+le \textit{storing mode} de fonctionnement impose d'avoir des équipement plus robuste alors que l'autre augmente le nombre de saut pour la transmission du paquet ce qui peut potentiellement surcharger le réseau.
 
 L'un des avantages d'IPv6 est l'auto-gestion des adresses : un appareil peut générer automatiquement son adresse sans avoir recours à un serveur DHCP. Le protocole \textbf{NDP} (\textit{Neighbor Discovery Protocol}) permet d'obtenir une adresse unique dans le réseau en évitant les conflits.
 
