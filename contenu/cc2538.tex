@@ -17,7 +17,7 @@ La première carte que nous avons utilisé est la CC 2538 de \emph{Texas Instrum
 \caption{Carte SmartRF06 pour le développement avec une CC 2538}
 \label{smartrf06}
 \end{figure}
-\todo[Images et descriptions]
+\todo[descriptions]
 
 \subsubsection{Test des cartes}
 
@@ -54,6 +54,17 @@ Après configuration des droits d’accès sur la machine virtuelle, la commande
 \todo[Copie d’écran de l’interface de flashage]
 \caption{\emph{FlashProgrammer}, logiciel de flashage externe à \emph{Contiki}}
 \label{flashprogrammer}
+\end{figure}
+
+\paragraph{Accès au flux standard de sortie}
+
+La \emph{SmartRF06} permet d’accéder facilement au flux de sortie standard des programmes : les pilotes USB créent un port de communication (port \texttt{COM} sous Windows, \texttt{ttyUSB} sous Linux) utilisable avec un terminal virtuel comme \emph{PuTTY} (\cref{putty}).
+
+\begin{figure}[H]
+\centering
+\todo[capture d’écran de PuTTY]
+\caption{Sortie d’un programme consultée avec \emph{}PuTTY}
+\label{putty}
 \end{figure}
 
 \paragraph{Manipulations des LEDs et boutons}
