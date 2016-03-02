@@ -15,15 +15,25 @@ La première carte que nous avons utilisé est la CC 2538 de \emph{Texas Instrum
 \paragraph{Installation sur les cartes}
 
 \emph{Contiki} fournit un script \emph{Python} pour installer un programme sur une carte CC 2538, appelé \emph{cc2538-bsl} \todo[référence documentation], qui est intégré dans le \texttt{Makefile}.
-Nous avons initialement suivi les étapes décrites dans sa documentation pour configurer la communication avec les cartes CC 25358, mais le résultat a invariablement été un message d’erreur indiquant que la carte ne répondait pas aux solicitations du script.
+Nous avons initialement suivi les étapes décrites dans sa documentation pour configurer la communication avec les cartes CC 25358, mais le résultat a invariablement été un message d’erreur indiquant que la carte ne répondait pas aux solicitations du script (\cref{bsl-error}).
 
+\begin{figure}
+\centering
 \todo[Copie de l’erreur]
+\caption{Erreur du script de flashage intégré}
+\label{bsl-error}
+\end{figure}
 
-Nous nous sommes alors tournés vers le logiciel développé par TI \todo[nom].
-Celui-ci ne fonctionnant que sur un système Windows \todo[Mac aussi ?], nous l’avons installé sur la machine hôte de la machine virtuelle.
+Nous nous sommes alors tournés vers le logiciel développé par TI, \emph{FlashProgrammer} (\cref{flashprogrammer}).
+Celui-ci ne fonctionnant que sur un système Windows, nous l’avons installé sur la machine hôte de la machine virtuelle.
 Afin de transmettre facilement les fichiers compilés par \emph{Contiki}, nous avons utilisé les outils de partage de dossier proposés par \emph{VirtualBox}.
 
-\todo[Copies d’écran du logiciel]
+\begin{figure}
+\centering
+\todo[Copie d’écran de l’interface de flashage]
+\caption{\emph{FlashProgrammer}, logiciel de flashage externe à \emph{Contiki}}
+\label{flashprogrammer}
+\end{figure}
 
 \paragraph{Manipulations des LEDs et boutons}
 
