@@ -75,6 +75,15 @@ Dans le cas de 6LoWPAN il existe deux types de routage, celui de niveau 3 et cel
 \label{routing}
 \end{figure}
 
+Dans le cas du \textit{mesh-under} (couche 2), le routage des données est transparent, donc on peut considérer le réseau comme un sous-réseau IP. Le seule routeur IP dans cette configuration est l'\textit{edge router}. Un domaine de \textit{broadcast} est quand même défini pour garder la compatibilité avec le protocole IPv6 et  conserver la détection de duplication d'adresse (DAD, \textit{Duplication Address Detection}), car ce type de message est diffusé sur tout le réseau et donc génère beaucoup de trafic. On privilégiera ce type de routage pour les réseaux de petite taille.
+
+D'un autre côté, le routage de niveau 3 (\textit{route-over}) fait en sorte que chaque saut représente un routeur IP. Son utilisation est favorable dans le cas de grand réseau et dans l'optique de l'agrandissement de ce dernier. 
+
+Dans le cas de 6LoWPAN, le protocole de routage le plus utilisé 
+
+ 
+--
+
 L'un des avantages d'IPv6 est l'auto-gestion des adresses : un appareil peut générer automatiquement son adresse sans avoir recours à un serveur DHCP. Le protocole \textbf{NDP} (\textit{Neighbor Discovery Protocol}) permet d'obtenir une adresse unique dans le réseau en évitant les conflits.
 
 La sécurité dans l'IoT est un véritable défi ; en effet, à cause du nombre de nœuds avec des performances assez faible, il y beaucoup de point d'entré pour les attaques de l'extérieur. Aussi l'un des points critiques dans l'IoT est la nature des données, qui dans certains cas peuvent être cruciales si elles servent à commander des alarmes ou des portes d'accès.
