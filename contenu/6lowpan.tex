@@ -20,6 +20,8 @@ le premier est le \textit{Full-Function Device} (FFD). Il peut servir de coordin
 
 Le second est le \textit{Reduced-Function Devices} (RFD). Ils sont prévues pour être extrêmement simple et possèdent peut de ressource. A cause de cela, il ne peuvent que communiquer avec les FFD et ne peuvent pas être les coordinateurs.
 
+Dans le réseau chaque équipement se voit attribuer un identifiant de 16 bits unique qui permet de faire du routage de niveau 2.
+
 \subsubsection{6LoWPAN}
 
 6LoWPAN est l'acronyme d'\textit{IPv6 over Low power Wireless Personal Area Networks}, ce veut dire Ipv6 au dessus de réseau personnelle sans-fil basse consommation. l'idée principale derrière ce protocole était d'amener IP à tous types d'appareils. 
@@ -62,13 +64,17 @@ Au niveau applicatif, il est bon de noter que 6LoWPAN supporte HTTP, mais ne l'u
 
 % Compression des en-tête %
 
-% Routage %
 
-% Autoconfiguration %
+Dans le cas de 6LoWPAN il existe 2 types de routage, celui de niveau 3 et celui de niveau 2. l'un utilisant l'adresse IPv6 et le second l'adresse de niveau 2 (l'identifiant 802.15.4).
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=15cm]{\rpDossier/images/routing.PNG}
+\caption{Les 2 type de routage avec 6LoWPAN}
+\label{routing}
+\end{figure}
 
 L'un des avantages d'IPv6 est l'auto-gestion des adresses, un appareil peut générer automatiquement son adresse sans avoir recours à un DHCP. Le protocole \textbf{NDP} (\textit{Neighbor Discovery Protocol}) permet d'obtenir cette adresse unique dans le réseau, ce qui évitera les conflits.
-
-% Securité %
 
 La sécurité dans l'IoT est un véritable challenge, en effet, à cause du nombre de nœuds avec des performances assez faible, il y beaucoup de point d'entré pour les attaques de l'extérieur. Aussi l'un des points critiques dans l'IoT est la nature des données, qui dans certains cas peuvent être cruciale sur elles servent à commander des alarmes ou des portes d'accès.
 
