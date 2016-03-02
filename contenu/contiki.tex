@@ -40,6 +40,7 @@ Les processus rendent la main à l’ordonnanceur lorsque cette procédure se te
 Les macros fournies par \emph{Contiki} permettent de sauvegarder la position du code en cours d’exécution et d’y retourner en donnant l’impression de fonctionner comme une bibliothèque de \emph{threads} (par exemple en fournissant des pseudo-instructions \texttt{PROCESS\_YIELD} et \texttt{PROCESS\_WAIT\_EVENT}).
 La pile est cependant utilisée par d’autres processus entre la mise en pause du processus et son réveil, modifiant l’état des variables locales non statiques.
 Avant d’avoir compris ce mécanisme, nous avons utilisé une variable de boucle dont le comportement étrange de la valeur nous a poussé à faire l’étude précise de ce fonctionnement.
+\label{variables-locales}
 
 D’autre part, le code situé avant la macro \texttt{PROCESS\_BEGIN} est exécuté à chaque réveil du processus.
 Nous n’avons pas eu de problème avec ce comportement, l’ayant compris avant de tenter des modification dans cette zone.

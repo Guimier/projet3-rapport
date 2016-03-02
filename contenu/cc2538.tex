@@ -25,13 +25,33 @@ Afin de transmettre facilement les fichiers compilés par \emph{Contiki}, nous a
 
 \todo[Copies d’écran du logiciel]
 
-\paragraph{\texttt{simple-udp-rpl}}
-
-\todo[Description programmes]
-
 \paragraph{Manipulations des LEDs et boutons}
 
 \todo[Description programme]
+
+\paragraph{Communication UDP}
+
+Afin de nous familiariser avec la pile réseau de \emph{Contiki}, nous avons ensuite compilé et exécuté les programmes de l’exemple classé dans le dossier \url{ipv6/simple-udp-rpl}.
+Cet exemple est constitué de trois programmes qui échangent des messages en UDP sur 6LowPAN.
+
+Tous ces programmes envoient leurs messages à des instants aléatoires de chacun des intervales consécutifs de vingt secondes suivant le démarrage du programme, ce qui assure un temps moyen de ving secondes entre les messages.
+Nous n’avons pas trouvé de documentation pour ce choix, mais on peut supposer qu’il réduit les problèmes de collisions.
+
+\subparagraph{\textit{Broadcast}}
+
+Ce programme peut être utilisé seul sur plusieurs cartes, qui envoient alors régulièrement des messages à l’ensemble de leurs voisins.
+Chaque carte indique sur son flux de sortie standard l’envoi et la réception de messages, ce qui permet de vérifier que la connectivité est établie.
+
+Nous avons modifié l’exemple de façon à numéroter les messages, pour vérifier que tous les messages étaient reçus.
+C’est à cette occasion que nous avons rencontré le problème posé par les variables locales (voir \cref{variables-locales}) et que nous avons cherché à mieux comprendre l’architecture de \emph{Contiki}.
+
+\subparagraph{\textit{Unycast}}
+
+Les deux programmes d’exemple en \textit{unycast}, \texttt{unicast-receiver} et \textt{unicast-sender} sont conçus pour fonctionner ensemble : une des deux cartes a un rôle de serveur (\textit{receiver}), l’autre de client ((\textit{sender})).
+Comme dans l’exemple de \textit{broadcast}, l’envoi et la réception de messages est indiquée sur le flux standard de sortie ; il sont en plus déjà numérotés.
+
+Cette architecture serveur-client utilise un mécanisme de services intégré à \emph{Contiki} sous le nom de \emph{servreg-hack} : ce processus se charge d’annoncer aux nœuds voisins qu’il fournit un service (identifié par un nombre entier), de retenir les services annoncés par ses voisins et de retransmettre ces annonces.
+Il permet ainsi de ne pas coder en dur dans le code du programme les adresses IP, rendant possible l’évolution d’un réseau d’objets connectés sans recompilation de tous les programmes lors d’un changement dans la répartition des tâches.
 
 \paragraph{Développement d’un programme d’action à distance}
 
