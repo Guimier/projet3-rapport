@@ -3,7 +3,35 @@
 % (séparément pour chacun).
 
 \rpResumeAuto{
-	% Ceci me semble le bon endroit pour rédiger un résumé
+Pour notre projet de troisième année à l'ISIMA, nous avons choisi de réalisé une étude sur le protocole \keyword{6LoWPAN}.
+C'est l'acronyme d'IPv6 over Low power Wireless Personal Area Network.
+L'ère de l'Internet des Objets (\keyword{IdO}) a commencé : d'ici 2020, il y aura plus de 20 milliards d'objets connectés à travers le monde et la plus part d'entre eu fonctionneront sur piles ou batteries. Mais à l'inverse des autres protocoles qui ne sont pas d'une très grande efficacité énergétique, 6LowPAN a pour but d'amener IPv6 aux appareils qui ont une faible emprunte énergétique.
+
+La première partie de l'étude était la découverte du protocole en lui-même, nous avons parcourus beaucoup de documentation et de spécification pour essayer de comprendre les mécanismes derrière le nom.
+Puis il nous a été procuré des appareils (TI cc2538dk) pour créer un prototype, la première étape étant l'établissement d'une communications entre deux équipements.
+L'utilisation de \keyword{Contiki}, un système d'exploitation léger, nous a permis d'utiliser 6LoWPAN.
+Finalement, nous avons a utiliser encore plus d'appareils (Arduino Mega avec des Xbee Shield) pour tester l'\keyword{interopérabilité} des appareils, car l'une des forces de 6LoWPAN est que l'on peut ajouter, enlever ou remplacer un équipement dans le réseau sans perte de connectivité (à part une petite, le temps que les nœuds se resynchronisent). 
+
+Nous avons eu un peu de mal à comprendre certains concepts de 6LoWPAN, mais grâce à notre formation et notre expérience, nous avons pu nous débrouiller.
+Actuellement, notre prototype (2 cc2538) marche correctement mais nous n'arrivons pas a tester l'interopérabilité car nous rencontrons des problèmes avec les Arduino.
+Malheureusement nous sommes à court de temps, donc nous avons améliorer le prototype et préparons le terrain pour un projet de l'année prochaine sur le même sujet.
+ 
+6LoWPAN est réellement un protocole plein de promesses mais pas très bien documenté, ce qui a rendue l'étude plutôt compliqué.
 }{
-	% Et ici le même, mais en anglais.
+
+For our third year project at ISIMA, we choose to carry a study regarding the viability of \keyword{6LoWPAN}. It is an acronym of IPv6 over Low power Wireless Personal Area Network. 
+The Internet of Things (\keyword{IoT}) era has begun: by 2020 it is expected that there will be over 20 billion connected devices in the world and most of them will be power supplied by batteries.
+Unlike other protocols which are not energy efficient enough, 6LowPAN aims to bring IPv6 to those devices with a low energy footprint.
+
+The first part of the study was to discover the protocol itself, we have been through a lot of documentation and specification trying to understand the mechanisms behind the name.
+Then we have been provided some hardware (TI cc2538dk) for setting up a prototype, the first step being to establish a communication between two devices.
+Running on \keyword{Contiki}, a lightweight Operating System, allowed us to use 6LoWPAN.
+Finally, we had to add even more hardware (Arduino Mega with Xbee Shield) to the prototype to test the \keyword{interoperability} of the devices, because one of the strengths of 6LowPAN is that you can add, remove or replace a device in the network without connectivity
+interruption (except a tiny one while the nodes are resynchronising). 
+
+We struggled a bit to understand some concepts of 6LowPAn but thanks to our formation and knowledge, we roughly got it all. 
+Currently, our prototype (with only two identic devices) is working fine but we haven’t managed yet to test the interoperability because we encountered a problem setting up the Arduino.
+Unfortunately, we are running out of time, so we are fine-tuning the prototype and making it ready for a next year project on the same subject.
+ 
+6LowPAN is definitely a protocol full of promises but not documented very well, which makes the study quite tough.
 }
