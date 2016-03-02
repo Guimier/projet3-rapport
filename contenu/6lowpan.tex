@@ -36,12 +36,16 @@ Sur un réseau 6LoWPAN le \textit{border/edge router} réalise 3 actions :
 
 Ensuite l'un des énormes avantages de 6LoWPAN, du fait de l'utilisation d'IP, est le routage de niveau 3 (couche réseau). Avec 6LowPAN il n'y pas besoin de maintenir une connexion au niveau applicatif, au contraire de ZigBee, Z-Wave ou Bluetooth qui requiert des passerelles applicatives pour accéder à Internet. En d'autre terme, l'équivalent du \textit{edge router} doit comprendre les protocoles utilisés au niveau applicatif. Cela réduit fortement la charge de travail du routeur.
 
+Voici un comparaison des différentes stack utilisés par les protocoles cités précédemment : 
+
 \begin{figure}[H]
 \centering
 \includegraphics[width=15cm]{\rpDossier/images/comparison.jpg}
 \caption{Comparaison de différents protocoles IoT}
 \label{comparison}
 \end{figure}
+
+-------Mettre des observations pour zigbee et z-wave ?-------
 
 En réalité IPv6 est plus une couche 2.5 que 3, en effet la couche 3 est IPv6. En fait, dans le cas de 6LowPAN la stack réseau ressemble plus à cela :
 
@@ -52,6 +56,8 @@ En réalité IPv6 est plus une couche 2.5 que 3, en effet la couche 3 est IPv6. 
 \label{stack6lowpan}
 \end{figure}
 
-Comme nous pouvons voir, 6LoWPAN fait la liaison entre 802.15.4 et IPv6.
+Comme nous pouvons voir, 6LoWPAN fait la liaison entre 802.15.4 et IPv6. Au niveau transport, 6LoWPAN supporte UDP et TCP mais ce dernier n'est pas beaucoup utiliser. En effet, TCP étant un protocole connecté les en-tête sont très grandes (à cause de l'ajout de numéro de séquence par exemple) et donc pas vraiment pratiques pour les appareils basse consommation. Le trafic supplémentaire, avec les ACK, rend son utilisation délicate. On privilégiera plutôt UDP et sa propre version de TLS, DTLS. 
+
+Au niveau applicatif, il est bon de noter que 6LoWPAN supporte HTTP, mais ne l'utilise que très peux a cause de la verbosité du langage. L'industrie a développé un protocole de messagerie plus adapté au nom de \textbf{COAP} (\textit{COnstrained Application Protocol}) qui est beaucoup plus adapté aux appareils basse consommation.
 
 
