@@ -18,3 +18,37 @@
 
 \def\rpTuteurIsima{Patrice Laurençot}
 \def\rpTuteurEntreprise{Pascal Mouchard}
+
+%%%%%%%%%% Titres %%%%%%%%%%
+
+\usepackage[outermarks]{titlesec}
+\setcounter{secnumdepth}{4}
+
+\ifflag{toc}{\setcounter{tocdepth}{5}}{}
+
+% Non fonctionnel…
+%\let\lgtodo\todo
+%\ifflag{todo}{
+%\renewcommand\todo[1][Il y a là encore des choses à écrire !]{\phantomsection\addcontentsline{toc}{subsubsection}{\protect\lgtodo[\protect##1]}\lgtodo[##1]}
+%}{
+%\renewcommand\todo[1][Il y a là encore des choses à écrire !]{\lgtodo[##1]}
+%}
+
+\titleformat{\paragraph}{\bfseries}{\theparagraph}{1em}{}
+\titlespacing{\paragraph}{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+
+\titleformat{\subparagraph}{\bfseries}{\theparagraph}{1em}{}
+\titlespacing{\subparagraph}{0pt}{*3}{0pt}
+
+\def\rpQuandHyperrefCharge{
+	\usepackage{algpseudocode}
+	\crefname{paragraph}{section}{sections}
+	\crefname{subparagraph}{section}{sections}
+}
+
+%%%%%%%%%% Lignes orphelines %%%%%%%%%%
+
+\clubpenalty = 10000
+\widowpenalty = 10000
+\displaywidowpenalty = 10000
+
