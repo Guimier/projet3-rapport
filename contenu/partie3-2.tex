@@ -4,26 +4,23 @@
 
 % Documentation Contiki
 Contiki, comprenant ses programmes tests et ses librairies, n'était pas très bien documenté.
-En effet, certaines bibliothèques utilisées n'étaient pas documenté du tout et nous avons du regarder dans le code pour comprendre leur fonctionnement, ce qui n'est pas toujours évident quand les librairies font plusieurs centaines de lignes.
+En effet, certaines bibliothèques utilisées n'étaient pas documentées du tout et nous avons dû regarder dans le code pour comprendre leur fonctionnement, ce qui n'est pas toujours évident quand les librairies font plusieurs centaines de lignes.
 
 % Flash des 2538
 
-Concernant les cartes, nous plus gros soucis fût d'importer des programmes sur les cartes.
-Le script fourni dans Contiki ne fonctionnant pas, nous étions bloqués jusqu'à ce que M. Laurençot nous fasses essayer le logiciel Flash Programmer de TI.
+Concernant les cartes, notre plus gros soucis fût d'importer des programmes sur les cartes.
+Le script fourni dans Contiki ne fonctionnant pas, nous étions bloqués jusqu'à ce que M. Laurençot nous fasse essayer le logiciel \emph{Flash Programmer} de TI.
 
-De ce fait, nous devions exporter les programmes compilé de la VM vers le pc hôte (un Windows) puis envoyer les exécutables sur les cartes.
-Aussi, surveiller le bon fonctionnement des cartes nous a posé soucis jusqu'à ce que l'on nous indique la bonne procédure à suivre pour afficher les sorties de débugages sur le port série.
+De ce fait, nous devions exporter les programmes compilés par la machine virtuelle vers la machine hôte (un \emph{Windows}) pour envoyer les exécutables sur les cartes.
+Aussi, surveiller le bon fonctionnement des cartes nous a posé souci jusqu'à ce que l'on nous indique la bonne procédure à suivre pour afficher les sorties de débugage sur le port série.
 
 % Sniffer
 
-Le sniffer fourni dans le kit de développement ne nous a pas été d'une grande utilité car nous n'avons compris que vers la fin que le canal utilisé par les cartes était parmi les derniers alors que nous n'avions tester que les premiers.  
+Le sniffer fourni dans le kit de développement ne nous a pas été d'une grande utilité car nous n'avons compris que vers la fin que le canal utilisé par les cartes était parmi les derniers alors que nous avions testé principalement les premiers.  
 
 % Arduino
 
-Pour les Arduino nous avons rencontré des problèmes pour faire communiquer l'Arduino en elle même et le module Xbee Shield. 
-En effet, après analyse nous avons découvert que la trame destinée au Shield était envoyée sur le port série (l'USB) au lieu d'aller sur le Shield.
-Une solution possible pour résoudre ce problème est la modification du hardware, qui implique d'utiliser les modules fabriqués par Arduino.
-
-
-
+Pour les \emph{Arduino}, nous avons rencontré des problèmes pour faire communiquer l'Arduino en elle même et le module Xbee Shield. 
+En effet, après analyse nous avons découvert que la trame destinée au \emph{Shield} était envoyée sur le port série (l'USB) au lieu d'aller sur le Shield.
+Une solution possible pour résoudre ce problème est le remplacement du matériel pour utiliser les modules fabriqués par Arduino.
 
