@@ -64,9 +64,8 @@ En revanche, sa connaissance nous a été utile pour comprendre des blocages que
 Un des processus fournis par \emph{Contiki} permet de manipuler le temps simplement : \emph{etimer} \citeweb{etimer}.
 Les autres processus peuvent enregistrer un \emph{timer} auprès de ce processus, qui est en charge d’émettre un événement lorsque celui-ci arrive à expiration.
 
-La macro \texttt{PROCESS\_WAIT\_EVENT\_UNTIL} permet d’attendre simplement l’événement émis à la fin du temps demandé, mais son utilisation dans les exemples (ajoutée à notre mauvaise compréhension des processus) nous a induits en erreur.
-En effet, les exemples ne vérifient pas que l’événement reçu par le processus est bien celui qui était attendu.
-Dans le contexte des exemples qui sont donnés, assez simples, ça n’a pas d’importance, mais nous avons eu par la suite des situations où deux \emph{timers} pouvaient arriver à terme presqu’au même moment dans une boucle.
-Lorsque cela arrivait, si le processus de gestion des \emph{timers} les traite dans le mauvaise ordre, notre processus entrait dans une attente infinie d’un \emph{timer} dont il avait déjà reçu l’événement.
+La macro \texttt{PROCESS\_WAIT\_EVENT\_UNTIL} permet d’attendre simplement l’événement émis à la fin du temps demandé, mais son utilisation dans les exemples (ajoutée à notre mauvaise compréhension des processus) est trop simple : l’identité du \textit{timer} émetteur de l’événement n’est pas vérifiée, ce qui peut poser des soucis dans une processus utilisant des \textit{timers} simutanés.
 
-\todo[schéma du problème + clarifier la description]
+Nous avons eu pendant nos expérimentations un cas de blocage du programme qui pourrait être lié à cet aspect : il se produisait lors d’une succession inhabituelle de réveils du processus.
+Nous avons pris à ce moment l’habitude de faire la vérification systématiquement et n’avons depuis plus eu le problème depuis ; nous ne sommes cependant pas capable de comprendre la succession d’événements qui aurait pu le produire et il est possible que ce ne soit pas lié.
+
