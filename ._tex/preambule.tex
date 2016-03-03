@@ -8,20 +8,6 @@
 	\documentclass[a4paper, oneside, 12pt]{article}
 \fi
 
-%%%%%%%%%% Garder au début %%%%%%%%%%
-
-\usepackage{color} % Utilisé par \todo et la configuration d'hyperref
-
-\ifflag{numerique}{
-	\usepackage{hyperref}
-	\hypersetup{
-	    colorlinks,
-	    linkcolor={blue!50!black},
-	    citecolor={black},
-	    urlcolor={blue!80!black}
-	}
-}{\def\phantomsection{}}
-
 %%%%%%%%%% Paquets %%%%%%%%%%
 
 % Paquets pour le Français
@@ -30,13 +16,14 @@
 \usepackage[english,francais]{babel} % Typographie française
 
 % Divers
-\usepackage[noabbrev]{cleveref}
 \usepackage{url}
 \usepackage{here}
 \usepackage{enumitem}
 
 % Images
 \usepackage{graphicx}
+
+\usepackage{color} % Utilisé par \todo et la configuration d'hyperref
 
 % Mise en page
 \usepackage{geometry}
@@ -101,18 +88,13 @@
 % Compatibilité, obsolète
 \let\keywords\rpKeywords
 
-%%%%%%%%%% Abstraction de la mise en forme %%%%%%%%%%
-
-\newcommand\nom[1]{\textsc{#1}}
-\newcommand\classe[1]{\textit{#1}}
-
 %%%%%%%%%% Outils %%%%%%%%%%
 
 \newcommand\rpFun{{\em{Informatique des Systèmes Embarqués}}}
 \newcommand\rpFdeux{{\em{Génie Logiciel et Systèmes Informatiques}}}
 \newcommand\rpFtrois{{\em{Systèmes d’Information et Aide à la Décision}}}
 \newcommand\rpFquatre{{\em{Calcul et Modélisation Scientifiques}}}
-\newcommand\rpFcinq{{\em{Réseaux et Sécurité informatique}}}
+\newcommand\rpFcinq{{\em{Réseaux et télécommunications}}}
 
 \def\rpLogoEcole{._tex/isima.png}
 \def\rpEcole{ Institut Supérieur d’Informatique, de Modélisation et de leurs Applications }
@@ -126,26 +108,12 @@
 }
 \makeatother
 
+\def\rpQuandHyperrefCharge{}
+
 \input{._tex/configuration.defauts.tex}
 \input{configuration}
 
 \setstretch{\rpInterligne}
-
-%%%%%%%%%% Méta-données PDF %%%%%%%%%%
-
-\bgroup
-	\def\nom#1{#1} % L'utilisateur peut avoir utilisé \nom, mais on ne peut pas
-	% formater dans ces données...
-	\edef\rpTmpAuteurs{\rpNom\ifdefined\rpSecondNom{ et \rpSecondNom}\fi}
-	\ifdefined\hypersetup
-		\expandafter\hypersetup{pdfauthor={\rpTmpAuteurs},pdftitle={\rpTitre}}
-	\else
-		\expandafter\pdfinfo{
-		   /Author (\rpTmpAuteurs)
-		   /Title  (\rpTitre)
-		}
-	\fi
-\egroup
 
 %%%%%%%%%% Pied de page %%%%%%%%%%
 
@@ -164,4 +132,40 @@
 
 \rpPiedPositionNumero{\thepage}
 \ifdefined\rpConfidentiel\rpPiedPositionConfidentiel{\rpConfidentielTexte}\fi
+
+
+%%%%%%%%%% Garder à la fin %%%%%%%%%%
+
+\def\nom#1{#1} % L'utilisateur peut avoir utilisé \nom, mais on ne peut pas
+% formater dans les données PDF...
+\edef\rpTmpAuteurs{\rpNom\ifdefined\rpSecondNom{ et \rpSecondNom}\fi}
+	
+\ifflag{numerique}{
+	\usepackage{hyperref}
+	\hypersetup{
+	    colorlinks,
+	    linkcolor={blue!50!black},
+	    citecolor={black},
+	    urlcolor={blue!80!black},
+	    pdfauthor={\rpTmpAuteurs},
+	    pdftitle={\rpTitre}
+	}
+	\usepackage[all]{hypcap}
+}{
+	\def\phantomsection{}
+	\expandafter\pdfinfo{
+	   /Author (\rpTmpAuteurs)
+	   /Title  (\rpTitre)
+	}
+}
+
+\usepackage[noabbrev]{cleveref}
+
+\rpQuandHyperrefCharge
+
+%%%%%%%%%% Abstraction de la mise en forme %%%%%%%%%%
+% \nom Ne doit pas être avant la section modifiant les méta-données PDF
+
+\def\nom#1{\textsc{#1}}
+\def\classe#1{\textit{#1}}
 
