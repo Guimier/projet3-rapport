@@ -10,7 +10,7 @@ Elle est équipée d’un port USB de type A qui permet de la brancher directeme
 \label{cc2531}
 \end{figure}
 
-Nous avons utilisé pour l’analyse le logiciel fourni par TI, \emph{SmartRF Packet Sniffer}.
+Nous avons effectué celle-ci avec le logiciel fourni par TI, \emph{SmartRF Packet Sniffer}.
 Celui-ci ne fournissant pas de décodage spécifique à 6LoWPAN, nous l’avons utilisé directement au niveau 802.15.4.
 
 \emph{SmartRF Packet Sniffer} ne permet pas une analyse simultanée de tous les canaux disponibles.
@@ -22,5 +22,7 @@ Nous avons cependant pu par la suite trouver le canal lors d’une rencontre ave
 
 Nous avons à cette occasion découvert que les messages envoyés par les cartes étaient dupliqués de nombreuses fois : certaines trames sont envoyées une vingtaine de fois.
 
-\todo[explications ?]
+Nous avons cherché la raison de cette redondance dans le code de \emph{Contiki}, mais nous n’avons pas eu le temps d’étudier profondément l’implémentation des couches basses.
+Ces répétitions peuvent être un comportement normal, n’étant pas traitées de manière répétée par le destinataire.
+Il s’agit d’un comportement qui pourrait être causé par la couche MAC en cas de perturbations importantes, mais les caractéristiques ne semblent pas être réunies (temps régulier entre les envois, pas de bruit particulier).
 

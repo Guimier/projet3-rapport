@@ -2,22 +2,22 @@
 
 \subsubsection{Installation}
 
-\emph{Contiki} se présente sous la forme d’une machine virtuelle \emph{Ubuntu} où sont préinstallées les paquets ou les sources de divers logiciels utiles au développement d’application pour des cartes électroniques.
+\emph{Contiki} se présente sous la forme d’une machine virtuelle (VM) \emph{Ubuntu} où sont préinstallés les paquets ou les sources de divers logiciels utiles au développement d’applications pour des cartes électroniques peu puissantes.
 
-La VM se trouve sur le site de \emph{Contiki} (\url{http://www.contiki-os.org/download.html}), une fois télécharger, on se retrouve avec une VM au format \emph{VMWare}, ce qui fait quelle n'est pas compatible avec \emph{VirtualBox}.
-Si on veut vraiment travailler avec \emph{VirtualBox} alors \emph{VMWare} propose un outil de conversion qui permet de convertir la VM dans une format open-source, le \texttt{ova}.
+La VM se trouve sur le site de \emph{Contiki} (\url{http://www.contiki-os.org/download.html}), une fois le téléchargement effectué, on se retrouve avec une VM au format \emph{VMWare} (\texttt{vmx}), ce qui fait qu’elle n'est pas compatible avec \emph{VirtualBox}.
+Si l’on veut vraiment travailler avec \emph{VirtualBox}, alors \emph{VMWare} propose un outil de conversion qui permet d’obtenir la VM dans un format open-source, l’\texttt{ova}.
 
-Il faut donc installer les deux outils puis dans un terminal (ou une invite de commande) entrer :
+Il faut donc installer les deux outils, puis entrer dans un terminal (ou une invite de commande) :
 \begin{verbatim}
-./ovftool [original .vmx location and filename]
-	[new .ova location and filename]
+./ovftool [chemin du fichier .vmx d’origine]
+	[chemin du fichier .ova à produire]
 \end{verbatim}
-Ce qui peut donner sous un Linux :
+Ce qui peut donner sous \emph{Linux} :
 \begin{verbatim}
 ./ovftool ~/Download/contiki.vmx ~/Download/contiki.ova
 \end{verbatim}
 
-Une fois l'opération terminé on peut alors importer la VM sur \emph{VirtualBox} qui fonctionnera exactement de la même manière que sur \emph{VMWare}.
+Une fois l'opération terminée on peut alors importer la VM dans \emph{VirtualBox}, où elle fonctionnera exactement de la même manière qu’avec \emph{VMWare}.
  
 \subsubsection{Cooja}
 
@@ -55,21 +55,21 @@ En effet, les processus sont implémentés sous forme de \emph{protothreads}, c�
 Chaque processus est une procédure (en pratique un pointeur de fonction) qui est appelée à chaque fois que le processus est activé.
 Les processus rendent la main à l’ordonnanceur lorsque cette procédure se termine (instruction \texttt{return}).
 
-Les macros fournies par \emph{Contiki} permettent de sauvegarder la position du code en cours d’exécution et d’y retourner en donnant l’impression de fonctionner comme une bibliothèque de \emph{threads} (par exemple en fournissant des pseudo-instructions \texttt{PROCESS\_YIELD} et \texttt{PROCESS\_WAIT\_EVENT}).
+Les macros fournies par \emph{Contiki} permettent de sauvegarder la position du code en cours d’exécution et d’y retourner en donnant l’impression de fonctionner comme une bibliothèque de \emph{threads} (avec par exemple des pseudo-instructions \texttt{PROCESS\_YIELD} et \texttt{PROCESS\_WAIT\_EVENT}).
 La pile est cependant utilisée par d’autres processus entre la mise en pause du processus et son réveil, modifiant l’état des variables locales non statiques.
-Avant d’avoir compris ce mécanisme, nous avons utilisé une variable de boucle dont le comportement étrange de la valeur nous a poussé à faire l’étude précise de ce fonctionnement.
+Avant d’avoir compris ce mécanisme, nous avons utilisé une variable de boucle sans précaution. C’est le comportement étrange de sa valeur qui nous a poussés à faire l’étude précise de ce fonctionnement.
 \label{variables-locales}
 
 D’autre part, le code situé avant la macro \texttt{PROCESS\_BEGIN} est exécuté à chaque réveil du processus.
 Nous n’avons pas eu de problème avec ce comportement, l’ayant compris avant de tenter des modification dans cette zone.
-En revanche, sa connaissance nous a été utile pour comprendre des blocages que nous avons eu avec les \emph{timers}, en y plaçant du code de journalisation.
+En revanche, sa connaissance nous a été utile pour comprendre des blocages que nous avons rencontrés, en y plaçant du code de journalisation.
 
 \paragraph{\emph{Timers}}
 
-Un des processus fournis par \emph{Contiki} permet de manipuler le temps simplement : \emph{etimer} \citeweb{etimer}.
-Les autres processus peuvent enregistrer un \emph{timer} auprès de ce processus, qui est en charge d’émettre un événement lorsque celui-ci arrive à expiration.
+Un des processus fournis par \emph{Contiki} permet de manipuler le temps simplement : \emph{etimer}~\citeweb{etimer}.
+Les autres processus peuvent enregistrer un \emph{timer} auprès de celui-ci, qui se charge d’émettre un événement lorsque la période indiquée est terminée.
 
-La macro \texttt{PROCESS\_WAIT\_EVENT\_UNTIL} permet d’attendre simplement l’événement émis à la fin du temps demandé, mais son utilisation dans les exemples (ajoutée à notre mauvaise compréhension des processus) est trop simple : l’identité du \textit{timer} émetteur de l’événement n’est pas vérifiée, ce qui peut poser des soucis dans une processus utilisant des \textit{timers} simutanés.
+La macro \texttt{PROCESS\_WAIT\_EVENT\_UNTIL} permet d’attendre simplement l’événement émis à la fin du temps demandé, mais son utilisation dans les exemples (ajoutée à notre mauvaise compréhension des processus) est trop simple : l’identité du \textit{timer} émetteur de l’événement n’est pas vérifiée, ce qui peut poser des soucis dans un processus utilisant des \textit{timers} simutanés.
 
 Nous avons eu pendant nos expérimentations un cas de blocage du programme qui pourrait être lié à cet aspect : il se produisait lors d’une succession inhabituelle de réveils du processus.
 Nous avons pris à ce moment l’habitude de faire la vérification systématiquement et n’avons depuis plus eu le problème depuis ; nous ne sommes cependant pas capable de comprendre la succession d’événements qui aurait pu le produire et il est possible que ce ne soit pas lié.

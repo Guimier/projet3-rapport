@@ -2,7 +2,7 @@
 
 \subsubsection{Matériel utilisé}
 
-Le deuxième type de cartes que nous devions utiliser était l’\emph{Arduino Mega} 2560 (\cref{arduino}).
+\noindent Le deuxième type de cartes que nous devions utiliser était l’\emph{Arduino Mega} 2560 (\cref{arduino}).
 
 \begin{figure}[H]
 \centering
@@ -36,7 +36,7 @@ La carte d’adaptation que nous avons utilisée n’est pas la même que celle 
 
 \paragraph{Environnement de développement}
 
-Les cartes \emph{Arduino} sont accompagnées d’un environnement de développement intégré spécifique \cref{arduino-ide}.
+Les cartes \emph{Arduino} sont accompagnées d’un environnement de développement intégré spécifique (\cref{arduino-ide}).
 En plus de la compilation et le téléchargement des programmes sur la carte, celui-ci propose notamment une console permettant de consulter le flux de sortie standard des cartes.
 
 \begin{figure}[H]
@@ -51,8 +51,9 @@ En plus de la compilation et le téléchargement des programmes sur la carte, ce
 Pour la communication 6LoWPAN, nous devions utiliser une bibliothèque qui a été adaptée par \emph{Télécom Bretagne} à partir de l’implémentation \emph{sicslowpan} qui est utilisée dans \emph{Contiki} \citeweb{sicslowpan-telecom}.
 
 Le code de l’exemple inclus dans cette bibliothèque a été conçu pour la carte produite par \emph{Arduino} : il nécessite la modification des branchements de la carte d’adaptation après le téléchargement du programme, afin de laisser le canal de communication série libre pour les communications avec la puce \emph{XBee}.
-Nous avons pu le comprendre en comparant les caractères envoyés dans le flux de sortie standard (grâce à la console) et les séquences de contrôle de la carte \emph{XBee}
-La carte produite par \emph{Arduino} dispose d’un petit bouton qui permet de faire ce changement de branchement aisément, mais pas la carte dont nous disposions : sur celle-ci, le branche permet des configurations plus avancées est effectué en déplaçant un cavalier sur trois rangées de broches.
+Nous avons pu le comprendre en comparant les caractères envoyés dans le flux de sortie standard (grâce à la console) et les séquences de contrôle de la carte \emph{XBee}.
+
+La carte produite par \emph{Arduino} dispose d’un bouton qui permet de faire ce changement de branchement aisément, mais pas la carte dont nous disposions : sur celle-ci, le branchement est effectué en déplaçant un cavalier sur trois rangées de broches,  ce qui permet des configurations plus avancées.
 
 Un des \textit{forks} de la bibliothèque \citeweb{sicslowpan-chuljin} semble avoir été modifié pour pouvoir utiliser d’autres broches que celles par défaut et donc profiter de cette plus grande capacité d’adaptation : il permet de définir un objet \textit{SoftwareSerial} à la place du \textit{HardwareSerial} qui est limité aux broches de la sortie par défaut.
 Le temps nous manquait et nous avons décidé avec notre tuteur de nous concentrer sur les CC 2538.
